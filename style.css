@@ -1,0 +1,286 @@
+.header {
+    display: flex;
+    position: relative;
+
+}
+
+.btn-right {
+    display: flex;
+    justify-content: flex-start;
+
+
+}
+
+.btn {
+    background-color: #181818;
+    border-radius: 40px;
+    padding: 8px;
+    width: 20px;
+    height: 21px;
+    text-align: center;
+    margin-left: 5px;
+
+
+}
+
+.btn-location {
+    position: absolute;
+    top: 9px;
+    left: 94px;
+}
+
+.btn-location span {
+    color: white;
+}
+
+.search-bar {
+    display: flex;
+    position: absolute;
+    left: 87vh;
+    top: 1vh;
+
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    width: 18rem;
+    padding: 10px 29px;
+    background-color: #181818;
+    border-radius: 10px;
+
+}
+
+.search-btn {
+    position: absolute;
+    top: 10px;
+    left: 7px;
+
+}
+
+.search-bar input::placeholder {
+    color: #868585;
+    font-size: 12px;
+}
+
+.mode-btn {
+    background-color: #181818;
+    border-radius: 40px;
+    width: 66px;
+    height: 28px;
+    position: absolute;
+    right: 30px;
+    top: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.ball {
+    background-color: white;
+    width: 23px;
+    height: 23px;
+    border-radius: 50px;
+    transition: left 0.3s;
+    cursor: pointer;
+    position: absolute;
+    right: 3px;
+}
+
+.moon-btn {
+    opacity: 0;
+}
+
+.sun-btn {
+    padding: 2px;
+}
+
+.light-mode {
+    background-color: #ebebeb;
+    color: black;
+}
+
+.date {
+    display: flex;
+    font-size: 12px;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.day {
+    margin: 4px;
+    color: #575757;
+}
+
+.white {
+    color: white;
+}
+
+.situ-btn {
+    background-color: #181818;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 34px;
+    width: 194px;
+    height: 32px;
+    align-items: center;
+
+
+}
+
+.header-bottom {
+    margin: 15px 9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ .weather-box{
+     display: flex;
+     width: 216px;
+     height: 189px;
+     background-color: #adccea;
+     border-radius: 31px;
+     position: relative;
+     margin: 0 15px;;
+ }
+ .weather-box::before{
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 30%;
+     background-color: rgba(0, 0, 0, 0.1);
+     content: "";
+
+ }
+.top-content{
+    display: flex;
+
+}
+.day-box{
+    display: flex;
+}
+.sat{
+    background-color: #181818;
+    width: 70px;
+    height: 152px;
+    border-radius: 25px;
+    margin: 7px 15px;
+    text-align: center;
+    padding: 10px 0;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+
+}
+.flex{
+    display: flex;
+
+
+}
+.line{
+   border: 1px solid #868686;
+}
+.square-box{
+    display: flex;
+    width: 232px;
+    height: 217px;
+    background-color: #181818;
+    border-radius: 30px;
+    margin: 19px 24px 0 0;
+    
+
+}
+.square-box-txt{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    padding: 18px;
+    height: 20px;
+}
+
+.bigger-box {
+        width: 290px;
+        height: 435px;
+        background-color: #181818;
+        border-radius: 30px;
+        margin: 19px 24px 0 0;
+}
+.title{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+
+}
+.boxes-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10vh;
+    padding: 5vh;
+    width: 89%;
+}
+
+
+.lower-boxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 4vh;
+    max-width: 30vh;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.lower-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 32vh;
+    height: 27vh;
+    background-color: #181818;
+    border-radius: 17px;
+    padding: 20px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    align-items: flex-start;
+}
+.city-pic {
+    max-width: 52vh;
+    width: 40rem;
+    height: 71vh;
+    border-radius: 20px;
+    object-fit: cover;
+    margin-left: 47vh;
+    position: relative;
+}
+
+
+.city-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    position: relative;
+}
+.weathers{
+    display: grid;
+    grid-gap: 3vh;
+    flex-wrap: wrap;
+
+
+}
+
+.weather{
+    display: flex;
+
+    background-color: #181818;
+    width: 227px;
+    height: 89px;
+    border-radius: 18px;
+}

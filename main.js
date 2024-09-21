@@ -1,34 +1,27 @@
+import AWN from 'awesome-notifications';
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import {setupCounter} from './counter.js'
 import axios from "axios";
 
 const Key = '198c32d1a5fd44f596174131241909'
 const baseurl = "http://api.weatherapi.com/v1"
-const q = 'dhaka';
+const q = 'paris';
 
+function getWeather() {
+    const url = `${baseurl}/current.json?key=${Key}&q=${q}`;
 
-    function getWeather() {
-    axios.get(baseurl,{
-        params: {
-            key: Key,
-            q:'dhaka'
-        }
-    }) // جایگزین URL با URL واقعی API
+    axios.get(url) // جایگزین URL با URL واقعی API
         .then(function (response) {
+            new AWN().success('با موفقیت درخواست گرفته شد', { durations: { success: 0 }, labels: { success: "موفقیت" } })
+
             const data = response.data;
-
-            // قرار دادن داده‌ها در HTML
-            document.getElementById('.weather-box').textContent = data.location.name;
-            console.log(data.location.name);
-
+            document.querySelectorAll('#location-name')[0].innerHTML = `${data.location.name} - ${data.location.country}`;
+            
         })
         .catch(function (error) {
-            console.error('Error fetching data:', error);
+            new AWN().alert('با مشکل:| درخواست گرفته شد', { durations: { success: 0 }, labels: { alert: "مشکل" } })
         });
 }
 
-    // فراخوانی تابع برای گرفتن اطلاعات
-    getWeather();
+// فراخوانی تابع برای گرفتن اطلاعات
+getWeather();
 

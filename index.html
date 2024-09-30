@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Vite App</title>
 </head>
-<body style="background-color: black">
+<body>
 <div class="header">
     <div class="btn-right">
         <div class="btn">
@@ -43,7 +43,7 @@
 
     </div>
     <div class="search-bar">
-        <input placeholder="Search City">
+        <input placeholder="Search City" id="search">
         <div class="search-btn">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="12.000000pt" height="12.000000pt"
                  viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
@@ -97,27 +97,82 @@
     </div>
 </section>
 <section class="flex">
-    <div class="weather-box" id="weather-box">
-        kk
+    <div class="weather-box" id="day-7">
+        <div class="first-row">
+            <h2 class="day-name"></h2>
+            <h2 class="time"></h2>
+        </div>
+        <div class="second-row">
+            <h1 class="current-temperature"></h1>
+            <img class="current-weather-icon" src="" alt="Weather Icon">
+        </div>
+        <div class="third-row">
+            <div>
+                <div>
+                    <span style="color: #85959a;font-family: Arial, Helvetica, sans-serif;font-size: 12px;">wind</span>
+                    <span class="wind"
+                          style="font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #181818;margin-right: 65px;"></span>
+                    <span style="color: #85959a;font-family: Arial, Helvetica, sans-serif;font-size: 12px">sunrise</span>
+                    <span class="sunrise"
+                          style="font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #181818"></span>
+                </div>
+
+            </div>
+            <div>
+                <span style="color: #85959a;font-family: Arial, Helvetica, sans-serif;font-size: 12px">Pressure</span>
+                <span class="pressure"
+                      style="font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #181818;margin-right: 17px;"></span>
+                <span style="color: #85959a;font-family: Arial, Helvetica, sans-serif;font-size: 12px">sunset</span>
+                <span class="sunset"
+                      style="font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #181818"></span>
+            </div>
+            <div>
+                <span style="color: #85959a;font-family: Arial, Helvetica, sans-serif;font-size: 12px">Humidity</span>
+                <span class="humidity"
+                      style="font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #181818"></span>
+            </div>
+
+
+        </div>
+
+
     </div>
-    <div class="day-box">
-        <div class="sat">SAT
+    <div class="day-container">
+        <div class="day-box" id="day-1">
+            <p class="day-name"></p>
             <hr class="line">
+            <img class="weather-icon" src="" alt="Weather Icon">
+            <p class="temperature"></p>
         </div>
-        <div class="sat">SUN
+        <div class="day-box" id="day-2">
+            <p class="day-name"></p>
             <hr class="line">
+            <img class="weather-icon" src="" alt="Weather Icon">
+            <p class="temperature"></p>
         </div>
-        <div class="sat">MON
+        <div class="day-box" id="day-3">
+            <p class="day-name"></p>
             <hr class="line">
+            <img class="weather-icon" src="" alt="Weather Icon">
+            <p class="temperature"></p>
         </div>
-        <div class="sat">TUE
+        <div class="day-box" id="day-4">
+            <p class="day-name"></p>
             <hr class="line">
+            <img class="weather-icon" src="" alt="Weather Icon">
+            <p class="temperature"></p>
         </div>
-        <div class="sat">WED
+        <div class="day-box" id="day-5">
+            <p class="day-name"></p>
             <hr class="line">
+            <img class="weather-icon" src="" alt="Weather Icon">
+            <p class="temperature"></p>
         </div>
-        <div class="sat">THU
+        <div class="day-box" id="day-6">
+            <p class="day-name"></p>
             <hr class="line">
+            <img class="weather-icon" src="" alt="Weather Icon">
+            <p class="temperature"></p>
         </div>
 
     </div>
@@ -127,25 +182,99 @@
 </div>
 <div class="boxes-container">
     <div class="lower-boxes">
-        <div class="lower-box">Wind Status</div>
-        <div class="lower-box">UV Index</div>
-        <div class="lower-box">Humidity</div>
-        <div class="lower-box">Visibility</div>
+        <div class="lower-box" id="wind-status">Wind Status
+            <img src="images/wind.png" class="wind-status">
+            <div>
+                <span id="wind"></span>
+                <span style="font-weight: lighter;font-family: sans-serif;">km/h</span>
+            </div>
+        </div>
+        <div class="lower-box">UV Index
+            <div>
+                <img class="uv-img">
+                <div style="text-align: center">
+                    <span id="uv-index"></span>
+                    <span style="font-weight: lighter;font-family: sans-serif; ">uv</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="lower-box">Humidity
+            <img src="images/humidity.png" class="humidity-img">
+            <div>
+                <span id="humidity">%</span>
+            </div>
+
+        </div>
+        <div class="lower-box">Visibility
+
+            <div>
+                <img src="images/visibility.png" class="visibility-img">
+                <p id="visibility"></p>
+            </div>
+        </div>
     </div>
 
 
     <div class="img-container">
+        <div class="text-box">
+        </div>
         <img src="images/street.jpg" alt="City Picture" class="city-pic">
+
 
     </div>
     <div class="weathers">
-        <div class="weather"></div>
-        <div class="weather"></div>
-        <div class="weather"></div>
-        <div class="weather"></div>
+        <div class="weather" id="city-0">
+            <div style="padding: 3px 8px 0 11px">
+                <span class="country-name"></span>
+            </div>
+            <div class="second-row" style="padding: 0 10px">
+                <p class="city-name"></p>
+                <img class="city-weather-icon">
+            </div>
+            <div>
+                <span class="condition-txt" style="padding: 0 8px 3px 11px"></span>
+            </div>
+        </div>
+        <div class="weather" id="city-1">
+            <div style="padding: 3px 8px 0 11px">
+                <span class="country-name"></span>
+            </div>
+            <div class="second-row" style="padding: 0 10px">
+                <p class="city-name"></p>
+                <img class="city-weather-icon">
+            </div>
+            <div>
+                <span class="condition-txt" style="padding: 0 8px 3px 11px"></span>
+            </div>
+        </div>
+        <div class="weather" id="city-2">
+            <div style="padding: 3px 8px 0 11px">
+                <span class="country-name"></span>
+            </div>
+            <div class="second-row" style="padding: 0 10px">
+                <p class="city-name"></p>
+                <img class="city-weather-icon">
+            </div>
+            <div>
+                <span class="condition-txt" style="padding: 0 8px 3px 11px"></span>
+            </div>
+        </div>
+        <div class="weather" id="city-3">
+
+            <div style="padding: 3px 8px 0 11px">
+                <span class="country-name"></span>
+            </div>
+            <div class="second-row" style="padding: 0 10px">
+                <p class="city-name"></p>
+                <img class="city-weather-icon">
+            </div>
+            <div>
+                <span class="condition-txt" style="padding: 0 8px 3px 11px"></span>
+            </div>
+        </div>
     </div>
 </div>
-
 
 <script type="module" src="main.js"></script>
 </body>

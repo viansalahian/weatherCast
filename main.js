@@ -1,6 +1,8 @@
 import AWN from 'awesome-notifications';
 import './style.css'
 import axios from "axios";
+import Chart from 'chart.js/auto';
+
 
 const Key = '198c32d1a5fd44f596174131241909'
 const baseurl = "https://api.weatherapi.com/v1"
@@ -57,9 +59,10 @@ search.addEventListener('keydown', function (event) {
 
             getWeather(searchValue);
             GetCurrentDay(searchValue);
+            renderChart(searchValue);
             searchList.push(searchValue);
 
-            // نمایش آخرین 5 جستجو
+
             let lastFiveSearch = searchList.slice(-4);
             lastFiveSearch.forEach((searchItem,index) => {
                 const url = `${baseurl}/current.json?key=${Key}&q=${searchItem}`;
@@ -84,7 +87,7 @@ search.addEventListener('keydown', function (event) {
 
             });
         } else {
-            console.log("Please enter a valid location.");
+            console.alert("Please enter a valid location.");
         }
     }
 });
@@ -168,3 +171,77 @@ function GetCurrentDay(location) {
 }
 
 GetCurrentDay(q);
+let  myChart;
+function renderChart(location) {
+    (async function() {
+        try {
+            const response = await axios.get(`${baseurl}/forecast.json?key=${Key}&q=${location}&days=7`);
+            const forecastData = response.data.forecast.forecastday;
+
+            const data = forecastData.map(day => {
+                const hours = day.hour.map(hour => hour.time.split(' ')[1]);
+                return {
+                    hours: hours,
+                    sunshine: day.day.uv,
+                    rainy: day.day.daily_chance_of_rain
+                };
+            });
+            if (myChart){
+                myChart.destroy();
+            }
+
+             myChart=new Chart(
+                document.getElementById('myChart'),
+                {
+                    type: 'bar',
+                    data: {
+                        labels: data[0].hours.filter((_, i) => i % 3 === 0),
+                        datasets: [
+                            {
+                                label: 'Sunny',
+                                data: data.map(row => row.sunshine),
+                                backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                            },
+                            {
+                                label: 'Chance of Rain (%)',
+                                data: data.map(row => row.rainy),
+                                backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                ticks: {
+                                    maxRotation: 0,
+                                }
+                            },
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                }
+            );
+        } catch (error) {
+            console.error('Error fetching data from API', error);
+        }
+    })();
+}
+renderChart(q);
+
+
+
+const toggleContainer = document.getElementById('toggle-container');
+const toggleBtn = document.getElementById('toggle-btn');
+let isAirActive = false;
+
+toggleContainer.addEventListener('click', () => {
+    if (isAirActive) {
+        toggleBtn.style.transform = 'translateX(0)';
+        isAirActive = false;
+    } else {
+        toggleBtn.style.transform = 'translateX(80px)';
+        isAirActive = true;
+    }
+});

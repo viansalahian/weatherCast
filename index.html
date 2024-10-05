@@ -91,9 +91,10 @@
         <div class="day">Tomorrow</div>
         <div class="day white">Next 7 Days</div>
     </div>
-    <div class="situ-btn">
-        <div class="forecast-btn">Forecast</div>
-        <div class="air-btn">Air</div>
+    <div class="toggle-container" id="toggle-container">
+        <div class="label">Forecast</div>
+        <div class="label">Air</div>
+        <div class="toggle-btn" id="toggle-btn"></div>
     </div>
 </section>
 <section class="flex">
@@ -174,6 +175,9 @@
             <img class="weather-icon" src="" alt="Weather Icon">
             <p class="temperature"></p>
         </div>
+        <div>
+            <canvas id="myChart" ></canvas>
+        </div>
 
     </div>
 </section>
@@ -224,19 +228,7 @@
 
     </div>
     <div class="weathers">
-        <div class="weather" id="city-0">
-            <div style="padding: 3px 8px 0 11px">
-                <span class="country-name"></span>
-            </div>
-            <div class="second-row" style="padding: 0 10px">
-                <p class="city-name"></p>
-                <img class="city-weather-icon">
-            </div>
-            <div>
-                <span class="condition-txt" style="padding: 0 8px 3px 11px"></span>
-            </div>
-        </div>
-        <div class="weather" id="city-1">
+        <div class="weather" id="city-3">
             <div style="padding: 3px 8px 0 11px">
                 <span class="country-name"></span>
             </div>
@@ -260,7 +252,19 @@
                 <span class="condition-txt" style="padding: 0 8px 3px 11px"></span>
             </div>
         </div>
-        <div class="weather" id="city-3">
+        <div class="weather" id="city-1">
+            <div style="padding: 3px 8px 0 11px">
+                <span class="country-name"></span>
+            </div>
+            <div class="second-row" style="padding: 0 10px">
+                <p class="city-name"></p>
+                <img class="city-weather-icon">
+            </div>
+            <div>
+                <span class="condition-txt" style="padding: 0 8px 3px 11px"></span>
+            </div>
+        </div>
+        <div class="weather" id="city-0">
 
             <div style="padding: 3px 8px 0 11px">
                 <span class="country-name"></span>

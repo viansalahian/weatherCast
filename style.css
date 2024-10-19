@@ -12,6 +12,8 @@ body.light-mode {
 .header {
     display: flex;
     position: relative;
+    flex-wrap: wrap; /* اجازه‌ی چرخش محتوا */
+    justify-content: space-between;
 
 }
 
@@ -366,42 +368,334 @@ body.light-mode {
     color: black;
     align-items: center;
 }
-.uv-img{
+
+.uv-img {
     width: 100%;
 }
-.visibility-img{
+
+.visibility-img {
     width: 75%;
     padding: 10px;
 }
 
-.humidity-img{
+.humidity-img {
     width: 79%;
     padding: 4px 21px;
 }
-.wind-status{
+
+.wind-status {
     width: 100%;
     height: 88px;
 }
-.city-name{
+
+.city-name {
     color: white;
     font-size: 17px;
     margin: 0;
 
 }
-.city-weather-icon{
+
+.city-weather-icon {
     width: 46px;
 }
-.country-name{
-    color:#5f5b5b ;
+
+.country-name {
+    color: #5f5b5b;
     font-size: 12px;
 }
-.condition-txt{
+
+.condition-txt {
     font-size: 12px;
     color: #8e8e8e;
 
 }
 
 
+body {
+    font-size: 16px;
+}
+
+/* برای صفحه‌های بسیار کوچک (345px و کمتر) */
+@media (max-width: 345px) {
+    .weather-box {
+        width: 100vw;
+    }
+
+    .day-box {
+        width: 100%;
+    }
+
+    .lower-box {
+        width: 100%;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+
+    .humidity-img, .visibility-img {
+        width: 40%;
+    }
+}
+
+/* برای موبایل‌ها (576px و کمتر) */
+@media (max-width: 576px) {
+    .weather-box {
+        width: 90vw;
+        margin-bottom: 15px;
+    }
+
+    .day-container {
+        gap: 5px;
+    }
+
+    .day-box {
+        width: 45%;
+        margin-bottom: 5px;
+    }
+
+    .lower-boxes {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .lower-box {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+
+    .search-btn {
+        top: 50px;
+        left: 10px;
+    }
+
+    .mode-btn {
+        margin-top: 10px;
+    }
+
+    .humidity-img, .visibility-img {
+        width: 50%;
+    }
+}
+
+/* برای صفحه‌های تبلت کوچک و موبایل‌های بزرگ (768px و کمتر) */
+@media (max-width: 768px) {
+    .header {
+        align-items: center;
+        padding: 10px;
+        display: flex;
+    }
+
+    .btn-right {
+        margin-bottom: 10px;
+        justify-content: center;
+        align-items: self-end;
+    }
+
+    .btn-location {
+        position: static;
+        margin-bottom: 10px;
+    }
+
+    .search-bar {
+        width: 70%;
+        position: static;
+        margin-bottom: 10px;
+    }
+
+    .search-bar input {
+        width: 85%;
+        padding-left: 40px;
+        border: none;
+    }
+
+    .search-btn {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 16px;
+    }
+
+    .search-btn {
+        position: absolute;
+        top: 75px;
+        left: 25px;
+    }
+
+    .mode-btn {
+        margin-top: 10px;
+        position: static;
+    }
+
+    .flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .weather-box {
+        width: 70vw;
+        margin-bottom: 20px;
+    }
+
+    .day-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .day-box {
+        width: 23vw;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .lower-boxes {
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
+
+    .lower-box {
+        width: 70%;
+    }
+
+    .boxes-container {
+        padding: 5vh;
+        width: 89%;
+        display: unset;
+    }
+
+    .humidity-img {
+        width: 61%;
+        padding: 1px 34px;
+    }
+
+    .visibility-img {
+        width: 61%;
+        padding: 1px 34px;
+    }
+
+    .city-pic {
+        margin-left: unset;
+    }
+
+    .img-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
+
+    .weathers {
+        display: grid;
+        grid-gap: 3vh;
+        justify-content: center;
+    }
+}
+
+/* برای iPad Air و صفحات تا 820px */
+@media (max-width: 820px) {
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .weather-box {
+        width: 38vw;
+    }
+
+    .day-container {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .day-box {
+        width: 12vw;
+    }
+
+    .boxes-container {
+        display: block;
+    }
+
+    .lower-boxes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5vh;
+        max-width: 54vh;
+    }
+
+    .city-pic {
+        margin-left: inherit;
+        object-fit: fill;
+        padding: 25px;
+        width: 35rem;
+        height: 60vh;
+    }
+
+    .weathers {
+        grid-gap: 3vh;
+        display: flex;
+        justify-content: space-between;
+    }
+    .weather{
+        width: 266px;
+        height: 117px;
+    }
+
+}
+
+/* برای صفحه‌های بزرگتر (1024px و کمتر) */
+@media (max-width: 1024px) {
+    .weather-box {
+        width: 65vw;
+    }
+    .boxes-container {
+        width: 79%;
+    }
+
+
+    .lower-boxes {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .lower-box {
+        width: 85%;
+    }
+
+    .day-box {
+        width: 29%;
+    }
+
+    .weathers {
+        grid-gap: 3vh;
+        justify-content: space-evenly;
+        display: flex;
+    }
+
+    .humidity-img {
+        width: 83%;
+    }
+
+    .visibility-img {
+        width: 80%;
+    }
+
+
+}
 
 
 /* dont change this codes */

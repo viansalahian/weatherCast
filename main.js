@@ -3,39 +3,33 @@ import './style.css'
 import axios from "axios";
 import Chart from 'chart.js/auto';
 
-
-const Key = '198c32d1a5fd44f596174131241909'
-const baseurl = "https://api.weatherapi.com/v1"
+const Key = '198c32d1a5fd44f596174131241909';
+const baseurl = "https://api.weatherapi.com/v1";
 const q = 'bangladesh';
 let searchList = [];
 
 //location
 function getWeather(location) {
     if (!location) {
-        location = q;
+        location = q; 
     }
     const url = `${baseurl}/current.json?key=${Key}&q=${location}`;
 
     axios.post(url)
         .then(function (response) {
 
-            // new AWN().success('با موفقیت درخواست گرفته شد', {durations: {success: 0}, labels: {success: "موفقیت"}})
-
             const data = response.data;
-            console.log(response.data);
-
             document.querySelectorAll('#location-name')[0].innerHTML = `${data.location.name} - ${data.location.country}`;
-
 
         })
         .catch(function (error) {
-            // new AWN().alert('با مشکل:| درخواست گرفته شد', {durations: {success: 0}, labels: {alert: "مشکل"}})
+            console.error('Error fetching weather data:', error);
         });
 }
 
 
-getWeather();
-
+getWeather(q);
+renderChart(q);
 
 let ball = document.querySelector('.ball');
 let modeBtn = document.querySelector('.mode-btn');
@@ -43,8 +37,6 @@ let moon = document.querySelector('.moon');
 ball.addEventListener('click', function () {
 
     document.body.classList.toggle('light-mode');
-
-
     modeBtn.classList.toggle('active');
 
 });
@@ -56,7 +48,6 @@ search.addEventListener('keydown', function (event) {
 
         let searchValue = search.value.trim();
         if (searchValue) {
-
             getWeather(searchValue);
             GetCurrentDay(searchValue);
             renderChart(searchValue);
@@ -64,37 +55,30 @@ search.addEventListener('keydown', function (event) {
 
 
             let lastFiveSearch = searchList.slice(-4);
-            lastFiveSearch.forEach((searchItem,index) => {
+            lastFiveSearch.forEach((searchItem, index) => {
                 const url = `${baseurl}/current.json?key=${Key}&q=${searchItem}`;
                 axios.get(url)
                     .then(function (response) {
                         const data = response.data;
-                        const citiesIcon=data.current.condition.icon;
-                        const txtCondition=data.current.condition.text;
-                        const name=data.location.name;
-                        const country=data.location.country;
+                        const citiesIcon = data.current.condition.icon;
+                        const txtCondition = data.current.condition.text;
+                        const name = data.location.name;
+                        const country = data.location.country;
 
-                        const weather=document.querySelector(`#city-${index}`);
-                        weather.querySelector('.city-weather-icon').src=citiesIcon;
-                        weather.querySelector('.condition-txt').textContent=txtCondition;
-                        weather.querySelector('.country-name').textContent=country;
-                        weather.querySelector('.city-name').textContent=name;
-
-
-
-
-                    })
-
+                        const weather = document.querySelector(`#city-${index}`);
+                        weather.querySelector('.city-weather-icon').src = citiesIcon;
+                        weather.querySelector('.condition-txt').textContent = txtCondition;
+                        weather.querySelector('.country-name').textContent = country;
+                        weather.querySelector('.city-name').textContent = name;
+                    });
             });
         } else {
-            console.alert("Please enter a valid location.");
+            console.log("Please enter a valid location.");
         }
     }
 });
 
 //days-weather
-
-
 function GetCurrentDay(location) {
     const url = `${baseurl}/forecast.json?key=${Key}&q=${location}&days=7`;
 
@@ -116,8 +100,6 @@ function GetCurrentDay(location) {
             const sunrise = astro.sunrise;
             const sunset = astro.sunset;
             const uv = currentDay.day.uv;
-            const windStatus = currentDay.wind_mph;
-
 
             const weatherBox = document.querySelector('.weather-box');
             weatherBox.querySelector('.time').textContent = Time;
@@ -134,7 +116,6 @@ function GetCurrentDay(location) {
             lowerBox.querySelector('#uv-index').textContent = uv;
             lowerBox.querySelector('#humidity').textContent = `${humidity}%`;
 
-
             switch (true) {
                 case (uv >= 0 && uv <= 2):
                     lowerBox.querySelector('.uv-img').src = './images/uv.png';
@@ -145,23 +126,18 @@ function GetCurrentDay(location) {
                 case(uv >= 6 && uv <= 8):
                     lowerBox.querySelector('.uv-img').src = './images/yellowuv.png';
                     break;
-
                 case (uv >= 9 && uv <= 11):
                     lowerBox.querySelector('.uv-img').src = './images/reduv.png';
                     break;
-
-
             }
-
-
             for (let i = 1; i <= 6; i++) {
                 const futureDay = response.data.forecast.forecastday[i];
-                const futureWeatherIcon = futureDay.day.condition.icon;
+                if( futureDay?.day ==null) continue;
+                const futureWeatherIcon = futureDay?.day?.condition?.icon;
                 const futureTemperature = `${futureDay.day.maxtemp_c}°`;
                 const futureDate = new Date(today);
                 futureDate.setDate(today.getDate() + i);
                 const futureDaysOfWeek = weekDays[futureDate.getDay()];
-
                 const dayBox = document.querySelector(`#day-${i}`);
                 dayBox.querySelector('.day-name').textContent = futureDaysOfWeek;
                 dayBox.querySelector('.weather-icon').src = futureWeatherIcon;
@@ -171,13 +147,27 @@ function GetCurrentDay(location) {
 }
 
 GetCurrentDay(q);
-let  myChart;
+
+const toggleContainer = document.getElementById('toggle-container');
+const toggleBtn = document.getElementById('toggle-btn');
+let isAirActive = false;
+
+toggleContainer.addEventListener('click', () => {
+    if (isAirActive) {
+        toggleBtn.style.transform = 'translateX(0)';
+        isAirActive = false;
+    } else {
+        toggleBtn.style.transform = 'translateX(80px)';
+        isAirActive = true;
+    }
+});
+
+let myChart;
 function renderChart(location) {
     (async function() {
         try {
             const response = await axios.get(`${baseurl}/forecast.json?key=${Key}&q=${location}&days=7`);
             const forecastData = response.data.forecast.forecastday;
-
             const data = forecastData.map(day => {
                 const hours = day.hour.map(hour => hour.time.split(' ')[1]);
                 return {
@@ -186,11 +176,10 @@ function renderChart(location) {
                     rainy: day.day.daily_chance_of_rain
                 };
             });
-            if (myChart){
+            if (myChart) {
                 myChart.destroy();
             }
-
-             myChart=new Chart(
+            myChart = new Chart(
                 document.getElementById('myChart'),
                 {
                     type: 'bar',
@@ -228,20 +217,3 @@ function renderChart(location) {
         }
     })();
 }
-renderChart(q);
-
-
-
-const toggleContainer = document.getElementById('toggle-container');
-const toggleBtn = document.getElementById('toggle-btn');
-let isAirActive = false;
-
-toggleContainer.addEventListener('click', () => {
-    if (isAirActive) {
-        toggleBtn.style.transform = 'translateX(0)';
-        isAirActive = false;
-    } else {
-        toggleBtn.style.transform = 'translateX(80px)';
-        isAirActive = true;
-    }
-});
